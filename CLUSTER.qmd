@@ -1,0 +1,117 @@
+---
+title: "CLUSTER ANALYSIS"
+author: "Anshy Vislao & Ricardo Flores"
+format: html
+editor: visual
+echo: true
+warning: false
+---
+
+# PARTITIONING CLUSTERING
+
+## Partitioning Around Medoids
+
+[*(Kaufman & Rousseeuw, 1990)*]{.smallcaps}
+
+We need to install and call the following packages
+
+```{r}
+library(tidyverse)
+library(sf)
+library(factoextra)
+library(cluster)
+library(NbClust)
+library(corrplot)
+
+```
+
+To add information we need to prepare a data frame where columns as variables and rows as elements.
+
+```{r}
+
+rm(list = ls())
+#data<-read.csv(file.choose())
+data<-read.csv("H:/CLUSTER/estaciones2.csv")
+rownames(data) <- c("Andahua","Aplao","Ayo","Cabanaconde","Choco","Chuquibamba", "Crucero_Alto","Huambo","Madrigal","Machahuay","Orcopampa","Pampa_Majes", "Pañe","Porpera","Sibayo","Tisco","Visuyo","Camana","Cotahuasi","Huanca", "Imata","Jana_Cayll","Lagunillas","Joya","Pillones","Puica","Salamanca", "Yanaquihua","Yanque")
+
+```
+
+Then we scale the data to uniform data with different units.
+
+```{r}
+stzn.data <- scale(data)
+```
+
+We can calculate the distance or dissimilarity matrix in order to use it as an input of the PAM function. With the function `dist()` we can define the observation data and the method ("euclidean","manhattan"). Then, the function PAM could be run as follows
+
+```{r}
+dist.data <- dist(stzn.data, method = "manhattan")
+```
+
+> The use of seed allows us run again the code with the same results
+
+```{r}
+set.seed(2000)
+clus.pam <- pam(stzn.data, 4, diss = F, metric = "manhattan")
+```
+
+Plotting the silhouette index and calculating the average value for each cluster
+
+```{r}
+fviz_silhouette(clus.pam) + theme_bw() + coord_flip()
+sltte.plt <- factoextra::fviz_silhouette(
+  clus.pam, label = FALSE, print.summary = TRUE
+) + theme_bw() + coord_flip() +
+  theme(
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.title = element_text(size = 1)
+)
+```
+
+Plotting the cluster with the tow main components
+
+```{r}
+factoextra::fviz_cluster(
+  clus.pam,
+  ggtheme = theme_bw(),
+  ellipse.type = "t",
+  labelsize=12,
+  geom = "point",
+  star.plot = TRUE
+)
+```
+
+# HIERARCHICAL CLUSTERING
+
+## AGGLOMERATIVE HIERARCHICAL CLUSTERING
+
+Considering the same data as the first method, we use the function `hclust()` as follow:
+
+```{r}
+clus.ahm <- hclust(d=dist.data,method = "ward.D2")
+```
+
+<!--# ward.D tiene buen agrupamiento cophenetic: 0.5656147 -->
+
+<!--# ward.D2 cophnetic:  -->
+
+Then, we can visualize the dendogram and calculate the correlation between cophenetic distance and the original distance
+
+```{r}
+fviz_dend(clus.ahm,cex=0.5,k=5,k_colors=c("#2E9FDF","#00EEEE","#E7B800","#FC4E07","#7FFF00"))
+coph <- cophenetic(clus.ahm)
+cor(dist.data, coph)
+
+grp<-cutree(clus.ahm,k=5)
+fviz_cluster(list(data=stzn.data,cluster=grp), palette=c("#2E9FDF","#00EEEE","#E7B800","#FC4E07","#7FFF00"))
+
+```
+
+Another alternative is the use of `agnes()` function
+
+```{r}
+clus_ag <- agnes(x=dist.data, diss= T, stand = F, metric = "manhattan", method = "ward")
+fviz_dend(clus_ag,cex=0.5,k=5,k_colors=c("#2E9FDF","#00AFBC","#E7B800","#FC4E07"))
+```
