@@ -1,2 +1,2 @@
-# cluster
+# CLUSTER ANALYSIS
 Cluster analysis
