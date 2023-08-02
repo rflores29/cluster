@@ -1,2 +1,4 @@
 # CLUSTER ANALYSIS
-Cluster analysis
+Created by: Anshy Vislao & Ricardo Flores
+
+Different methods for clustering analysis
