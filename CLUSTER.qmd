@@ -32,7 +32,11 @@ To add information we need to prepare a data frame where columns as variables an
 rm(list = ls())
 data<-read.csv(file.choose())
 #data<-read.csv("H:/CLUSTER/estaciones2.csv")
-rownames(data) <- c("Andahua","Aplao","Ayo","Cabanaconde","Choco","Chuquibamba", "Crucero_Alto","Huambo","Madrigal","Machahuay","Orcopampa","Pampa_Majes", "Pañe","Porpera","Sibayo","Tisco","Visuyo","Camana","Cotahuasi","Huanca", "Imata","Jana_Cayll","Lagunillas","Joya","Pillones","Puica","Salamanca", "Yanaquihua","Yanque")
+rownames(data) <- c("Andahua","Aplao","Ayo","Cabanaconde","Choco","Chuquibamba",
+                    "Crucero_Alto","Huambo","Madrigal","Machahuay","Orcopampa","Pampa_Majes",
+                    "Pañe","Porpera","Sibayo","Tisco","Visuyo","Camana","Cotahuasi","Huanca",
+                    "Imata","Jana_Cayll","Lagunillas","Joya","Pillones","Puica","Salamanca",
+                    "Yanaquihua","Yanque")
 
 ```
 
@@ -95,7 +99,7 @@ clus.ahm <- hclust(d=dist.data,method = "ward.D2")
 
 <!--# ward.D tiene buen agrupamiento cophenetic: 0.5656147 -->
 
-<!--# ward.D2 cophnetic:  -->
+<!--# ward.D2 cophnetic: 0.7119054 -->
 
 Then, we can visualize the dendogram and calculate the correlation between cophenetic distance and the original distance
 
