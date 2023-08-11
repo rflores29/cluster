@@ -104,11 +104,11 @@ clus.ahm <- hclust(d=dist.data,method = "ward.D2")
 Then, we can visualize the dendogram and calculate the correlation between cophenetic distance and the original distance
 
 ```{r}
-fviz_dend(clus.ahm,cex=0.5,k=5,k_colors=c("#2E9FDF","#00EEEE","#E7B800","#FC4E07","#7FFF00"))
+fviz_dend(clus.ahm,cex=0.5,k=3,k_colors=c("#2E9FDF","#00EEEE","#E7B800","#FC4E07","#7FFF00"))
 coph <- cophenetic(clus.ahm)
 cor(dist.data, coph)
 
-grp<-cutree(clus.ahm,k=5)
+grp<-cutree(clus.ahm,k=3)
 fviz_cluster(list(data=stzn.data,cluster=grp), palette=c("#2E9FDF","#00EEEE","#E7B800","#FC4E07","#7FFF00"))
 
 ```
@@ -117,5 +117,5 @@ Another alternative is the use of `agnes()` function
 
 ```{r}
 clus_ag <- agnes(x=dist.data, diss= T, stand = F, metric = "manhattan", method = "ward")
-fviz_dend(clus_ag,cex=0.5,k=5,k_colors=c("#2E9FDF","#00AFBC","#E7B800","#FC4E07"))
+fviz_dend(clus_ag,cex=0.5,k=3,k_colors=c("#2E9FDF","#00AFBC","#E7B800","#FC4E07"))
 ```

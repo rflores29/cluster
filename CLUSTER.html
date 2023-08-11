@@ -199,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!--# ward.D2 cophnetic: 0.7119054 -->
 <p>Then, we can visualize the dendogram and calculate the correlation between cophenetic distance and the original distance</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_dend</span>(clus.ahm,<span class="at">cex=</span><span class="fl">0.5</span>,<span class="at">k=</span><span class="dv">5</span>,<span class="at">k_colors=</span><span class="fu">c</span>(<span class="st">"#2E9FDF"</span>,<span class="st">"#00EEEE"</span>,<span class="st">"#E7B800"</span>,<span class="st">"#FC4E07"</span>,<span class="st">"#7FFF00"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_dend</span>(clus.ahm,<span class="at">cex=</span><span class="fl">0.5</span>,<span class="at">k=</span><span class="dv">3</span>,<span class="at">k_colors=</span><span class="fu">c</span>(<span class="st">"#2E9FDF"</span>,<span class="st">"#00EEEE"</span>,<span class="st">"#E7B800"</span>,<span class="st">"#FC4E07"</span>,<span class="st">"#7FFF00"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="CLUSTER_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7119054</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>grp<span class="ot">&lt;-</span><span class="fu">cutree</span>(clus.ahm,<span class="at">k=</span><span class="dv">5</span>)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>grp<span class="ot">&lt;-</span><span class="fu">cutree</span>(clus.ahm,<span class="at">k=</span><span class="dv">3</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(<span class="fu">list</span>(<span class="at">data=</span>stzn.data,<span class="at">cluster=</span>grp), <span class="at">palette=</span><span class="fu">c</span>(<span class="st">"#2E9FDF"</span>,<span class="st">"#00EEEE"</span>,<span class="st">"#E7B800"</span>,<span class="st">"#FC4E07"</span>,<span class="st">"#7FFF00"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="CLUSTER_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Another alternative is the use of <code>agnes()</code> function</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>clus_ag <span class="ot">&lt;-</span> <span class="fu">agnes</span>(<span class="at">x=</span>dist.data, <span class="at">diss=</span> T, <span class="at">stand =</span> F, <span class="at">metric =</span> <span class="st">"manhattan"</span>, <span class="at">method =</span> <span class="st">"ward"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_dend</span>(clus_ag,<span class="at">cex=</span><span class="fl">0.5</span>,<span class="at">k=</span><span class="dv">5</span>,<span class="at">k_colors=</span><span class="fu">c</span>(<span class="st">"#2E9FDF"</span>,<span class="st">"#00AFBC"</span>,<span class="st">"#E7B800"</span>,<span class="st">"#FC4E07"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_dend</span>(clus_ag,<span class="at">cex=</span><span class="fl">0.5</span>,<span class="at">k=</span><span class="dv">3</span>,<span class="at">k_colors=</span><span class="fu">c</span>(<span class="st">"#2E9FDF"</span>,<span class="st">"#00AFBC"</span>,<span class="st">"#E7B800"</span>,<span class="st">"#FC4E07"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="CLUSTER_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
